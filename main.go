@@ -35,13 +35,13 @@ func String(length int) string {
 }
 
 func main() {
-	ipfsApiAddress := os.Getenv("IPFS_API_ADDRESS")
+	ipfsApiAddress := os.Getenv("IPFS_API_URL")
 	if ipfsApiAddress == "" {
 		ipfsApiAddress = "localhost:5001"
 	}
 
 	sh := shell.NewShell(ipfsApiAddress)
-	for i := 0; i < 100; i++ {
+	for {
 		payloadLength := rand.Intn(payloadLengthMax-payloadLengthMin+1) + payloadLengthMin //(rand.Intn(max - min + 1) + min)
 		payloadString := StringWithCharset(payloadLength, charset)
 		cid, err := sh.Add(strings.NewReader(payloadString))
